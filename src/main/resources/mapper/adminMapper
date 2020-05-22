@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.yanjunyi.ssm.dao.AdminDao">
+    <resultMap id="matchAdmin" type="Admin">
+        <id property="adminId" column="admin_id"/>
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+    </resultMap>
+    <select id="getByNameAndPwd" parameterType="Admin" resultMap="matchAdmin">
+        select 1 from admin where admin_id=#{adminId} and password = #{password}
+    </select>
+    <update id="resetPassword">
+        update admin set password = #{password}
+        where admin_id = #{adminId}
+    </update>
+    <select id="getPassword" resultType="String" parameterType="long">
+        select password from admin where admin_id = #{adminId}
+    </select>
+    <select id="getUsername" resultType="String" parameterType="long">
+        select username from admin where admin_id = #{adminId}
+    </select>
+</mapper>
