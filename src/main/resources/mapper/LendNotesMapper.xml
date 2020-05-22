@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanjunyi.ssm.dao.LendNotesDao">
+    <insert id="addLendNotes" parameterType="LendNotes" keyProperty="ser_num" useGeneratedKeys="true">
+        insert into lend_list (book_id,reader_id,lend_date)values
+        (#{book_id} , #{reader_id} , sysdate() )
+    </insert>
+    <delete id="deleteNotesById" parameterType="long">
+        delete from lend_list where ser_num = #{ser_num}
+    </delete>
+    <select id="myLendList" resultType="LendNotes" parameterType="long">
+        select * from lend_list where reader_id = #{reader_id}
+    </select>
+</mapper>
